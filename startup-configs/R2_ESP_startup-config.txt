@@ -1,0 +1,184 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R2_ESP
+!
+!
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+!
+crypto isakmp key grup0d3m0n0s address 86.106.77.1
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Tunnel0
+ no ip address
+ mtu 1476
+ ipv6 address 2001:1200:ED11:1::2/64
+ ipv6 enable
+ tunnel source Serial0/0/0
+ tunnel destination 86.106.77.1
+ tunnel mode ipv6ip
+!
+!
+interface FastEthernet0/0
+ description Deshabilitada
+ no ip address
+ duplex full
+ speed 100
+ ipv6 address 2001:1200:EB21:1::1/64
+ ipv6 enable
+!
+interface FastEthernet0/1
+ description Deshabilitada
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 enable
+ shutdown
+!
+interface Serial0/0/0
+ ip address 86.106.77.26 255.255.255.252
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial0/1/0
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface FastEthernet1/0
+ description Enlace Transito hacia MLSW1 (Vlan100)
+ switchport mode access
+!
+interface FastEthernet1/1
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/2
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/3
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/4
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/5
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/6
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/7
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/8
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/9
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/10
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/11
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/12
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/13
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/14
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/15
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 86.106.77.25 
+!
+ip flow-export version 9
+!
+ipv6 route 2001:1200:EA11::/48 2001:1200:ED11:1::1
+ipv6 route 2001:1200:EC11::/48 2001:1200:ED11:1::1
+ipv6 route 2001:1200:EB21::/48 2001:1200:EB21:1::2
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

@@ -1,0 +1,164 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname ISP_FL
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/0/0
+ description Enlace a ISP_BOG
+ ip address 86.106.77.6 255.255.255.252
+!
+interface Serial0/0/1
+ description Enlace vertical a ISP_NET
+ ip address 86.106.77.21 255.255.255.252
+ clock rate 2000000
+!
+interface Serial0/1/0
+ description Enlace a ISP_ESP
+ ip address 86.106.77.9 255.255.255.252
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface FastEthernet1/0
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/1
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/2
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/3
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/4
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/5
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/6
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/7
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/8
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/9
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/10
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/11
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/12
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/13
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/14
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/15
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router eigrp 1
+ network 86.106.77.4 0.0.0.3
+ network 86.106.77.8 0.0.0.3
+ network 86.106.77.20 0.0.0.3
+ no auto-summary
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

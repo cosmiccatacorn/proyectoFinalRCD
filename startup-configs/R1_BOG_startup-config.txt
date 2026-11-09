@@ -1,0 +1,222 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname router_bog
+!
+!
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+ipv6 dhcp pool internal
+ address prefix 2001:1200:EA11:0020::/64 lifetime 172800 86400
+ dns-server 2001:1200:EC11:10::20
+ domain-name kcc.net
+!
+!
+!
+!
+crypto isakmp key grup0d3m0n0s address 86.106.77.26
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Tunnel0
+ no ip address
+ mtu 1476
+ ipv6 address 2001:1200:ED11:1::1/64
+ ipv6 enable
+ tunnel source Serial0/0/0
+ tunnel destination 86.106.77.26
+ tunnel mode ipv6ip
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address 2001:1200:EC11:1::1/64
+ ipv6 address 2001:1200:EC11:10::1/64
+ ipv6 enable
+ ipv6 ospf 1 area 0
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.10
+ encapsulation dot1Q 10
+ no ip address
+ ipv6 address 2001:1200:EA11:10::1/64
+ ipv6 nd other-config-flag
+ ipv6 nd managed-config-flag
+ ipv6 enable
+ ipv6 ospf 1 area 0
+!
+interface FastEthernet0/1.20
+ encapsulation dot1Q 20
+ no ip address
+ ipv6 address 2001:1200:EA11:20::1/64
+ ipv6 nd other-config-flag
+ ipv6 nd managed-config-flag
+ ipv6 ospf 1 area 0
+ ipv6 dhcp server internal
+!
+interface FastEthernet0/1.30
+ encapsulation dot1Q 30
+ no ip address
+ ipv6 address 2001:1200:EA11:30::1/64
+ ipv6 nd other-config-flag
+ ipv6 enable
+ ipv6 ospf 1 area 0
+!
+interface FastEthernet0/1.99
+ encapsulation dot1Q 99 native
+ no ip address
+ ipv6 address 2001:1200:EA11:99::1/64
+ ipv6 nd other-config-flag
+ ipv6 ospf 1 area 0
+!
+interface Serial0/0/0
+ ip address 86.106.77.1 255.255.255.252
+!
+interface Serial0/0/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial0/1/0
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface FastEthernet1/0
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/1
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/2
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/3
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/4
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/5
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/6
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/7
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/8
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/9
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/10
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/11
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/12
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/13
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/14
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/15
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ipv6 router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ redistribute static 
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 86.106.77.2 
+!
+ip flow-export version 9
+!
+ipv6 route 2001:1200:EB21::/48 2001:1200:ED11:1::2
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

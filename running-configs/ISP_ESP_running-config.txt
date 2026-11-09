@@ -1,0 +1,175 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname ISP_ESP
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/0/0
+ description Enlace a ISP_FL (EIGRP)
+ ip address 86.106.77.10 255.255.255.252
+ clock rate 2000000
+!
+interface Serial0/0/1
+ description Enlace a ISP_NET (OSPF)
+ ip address 86.106.77.18 255.255.255.252
+ clock rate 2000000
+!
+interface Serial0/1/0
+ description Enlace a R2_ESP
+ ip address 86.106.77.25 255.255.255.252
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface FastEthernet1/0
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/1
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/2
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/3
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/4
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/5
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/6
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/7
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/8
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/9
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/10
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/11
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/12
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/13
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/14
+ switchport mode access
+ shutdown
+!
+interface FastEthernet1/15
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router eigrp 1
+ redistribute ospf 1 metric 10000 100 255 1 1500 
+ network 86.106.77.8 0.0.0.3
+ network 86.106.77.24 0.0.0.3
+ network 86.0.0.0
+ no auto-summary
+!
+router ospf 1
+ router-id 2.2.2.2
+ log-adjacency-changes
+ redistribute eigrp 1 subnets 
+ redistribute connected subnets 
+ network 86.106.77.16 0.0.0.3 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
