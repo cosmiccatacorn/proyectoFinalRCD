@@ -6,6 +6,7 @@ no service password-encryption
 !
 hostname sw5
 !
+!
 enable secret 5 $1$mERr$yqCFMuPEm8FC1kIL/MX4Z.
 !
 !
@@ -81,6 +82,8 @@ interface GigabitEthernet0/2
 interface Vlan1
  no ip address
  shutdown
+!
+!
 !
 !
 !

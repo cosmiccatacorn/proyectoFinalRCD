@@ -6,6 +6,9 @@ no service password-encryption
 !
 hostname sw1
 !
+ipv6 unicast-routing
+!
+!
 enable secret 5 $1$mERr$pMH5NnOPZOmiMiqPvTG4Z0
 !
 !
@@ -77,8 +80,22 @@ interface Vlan1
  no ip address
  shutdown
 !
+interface Vlan20
+ no ip address
+ ipv6 address 2001:1200:EA11:20::13/64
+!
+interface Vlan99
+ no ip address
 !
 !
+!
+snmp-server community kccrw RW
+snmp-server community kccro RO
+!
+!
+ipv6 access-list snmp_bog
+ permit ipv6 2001:1200:EA11:20::/64 any
+ deny ipv6 any any
 !
 line con 0
  password bog

@@ -72,7 +72,6 @@ interface FastEthernet0/0
  no ip address
  duplex auto
  speed auto
- ipv6 address 2001:1200:EC11:1::1/64
  ipv6 address 2001:1200:EC11:10::1/64
  ipv6 enable
  ipv6 ospf 1 area 0
@@ -87,18 +86,14 @@ interface FastEthernet0/1.10
  no ip address
  ipv6 traffic-filter ACL_BOG_GUEST in
  ipv6 address 2001:1200:EA11:10::1/64
- ipv6 nd other-config-flag
- ipv6 nd managed-config-flag
  ipv6 enable
  ipv6 ospf 1 area 0
 !
 interface FastEthernet0/1.20
  encapsulation dot1Q 20
  no ip address
- ipv6 traffic-filter ACL_BOG_INTERNAL in
+ ipv6 traffic-filter kccrw in
  ipv6 address 2001:1200:EA11:20::1/64
- ipv6 nd other-config-flag
- ipv6 nd managed-config-flag
  ipv6 ospf 1 area 0
  ipv6 dhcp server internal
 !
@@ -107,7 +102,6 @@ interface FastEthernet0/1.30
  no ip address
  ipv6 traffic-filter ACL_BOG_INTERNAL in
  ipv6 address 2001:1200:EA11:30::1/64
- ipv6 nd other-config-flag
  ipv6 enable
  ipv6 ospf 1 area 0
 !
@@ -115,7 +109,6 @@ interface FastEthernet0/1.99
  encapsulation dot1Q 99 native
  no ip address
  ipv6 address 2001:1200:EA11:99::1/64
- ipv6 nd other-config-flag
  ipv6 ospf 1 area 0
 !
 interface Serial0/0/0
@@ -227,12 +220,22 @@ ipv6 access-list ACL_BOG_INTERNAL
 ipv6 access-list ACL_BOG_GUEST
  deny tcp 2001:1200:EA11:10::/64 host 2001:1200:EC11:10::10 eq 443
  permit tcp 2001:1200:EA11:10::/64 host 2001:1200:EC11:10::10 eq www
+ deny udp any any eq snmp
+ deny udp any any eq 162
+ permit ipv6 any any
+ipv6 access-list snmp_bog
+ permit ipv6 2001:1200:EA11:20::/64 any
+ deny ipv6 any any
+ipv6 access-list no-snmp-wan
+ deny udp any any eq snmp
  permit ipv6 any any
 !
 !
 !
 !
 !
+snmp-server community kccrw RW
+snmp-server community kccro RO
 !
 line con 0
  password cisco
