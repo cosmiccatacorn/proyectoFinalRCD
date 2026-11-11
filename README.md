@@ -1,5 +1,5 @@
 # proyectoFinalRCD
-# Documentación del Proyecto de Redes y Comunicación de Datos
+# Documentación parcial del Proyecto de Redes y Comunicación de Datos 
 
 ## 1. Introducción y Topología
 
